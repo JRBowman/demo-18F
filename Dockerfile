@@ -19,8 +19,6 @@ RUN cd /app && gem install bundler && bundle install
 
 COPY . /app
 
-RUN chown 1000720000:1000720000 /apps
-
 WORKDIR /app
 EXPOSE 4000
 
