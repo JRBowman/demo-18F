@@ -16,3 +16,11 @@ apt-get install -y nodejs
 COPY Gemfile Gemfile.lock /app/
 
 RUN cd /app && gem install bundler && bundle install
+
+COPY . /app
+
+WORKDIR /app
+EXPOSE 4000
+
+ENTRYPOINT ["ruby", "/app/docker_entrypoint.rb"]
+CMD ["./serve-blog"]
