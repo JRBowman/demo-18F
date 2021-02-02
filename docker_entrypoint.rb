@@ -1,4 +1,4 @@
-#require 'etc'
+require 'etc'
 
 # We want our Docker process to use the same uid as the owner of the
 # repository checkout. This will ensure that any created files
@@ -23,18 +23,12 @@
 #  false
 #end
 
-#def assume_uid
-#  unless does_uid_exist(HOST_UID)
-#    username = HOST_USER
-#    username += '0' while does_username_exist(username)
-#    home_dir = '/home/' + username
-#    system("useradd -d #{home_dir} -m #{username} -u #{HOST_UID}")
-#  end
-#  ENV['HOME'] = '/home/' + Etc.getpwuid(HOST_UID).name
-#  Process::UID.change_privilege(HOST_UID)
-#  return unless Process.euid != HOST_UID
-#end
+def assume_uid
+  ENV['HOME'] = '/home/' + Etc.getpwuid(100).name
+  Process::UID.change_privilege(100)
+  return unless Process.euid != 100
+end
 
-#assume_uid
+assume_uid
 
 exec(*ARGV)
