@@ -4,7 +4,7 @@ require 'etc'
 # repository checkout. This will ensure that any created files
 # have the same owner and can be accessed on the host system, rather than
 # being owned by root and hard to modify or delete.
-HOST_UID = File::Stat.new('/app').uid
+HOST_UID = '1000720000'
 
 # This is just the username for the uid, for cosmetic purposes only really.
 HOST_USER = '18f_user'.freeze
