@@ -13,11 +13,13 @@ RUN  apt-get update >/dev/null && \
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
 apt-get install -y nodejs
 
-COPY Gemfile Gemfile.lock /app/
-
 RUN cd /app && gem install bundler && bundle install
 
+COPY Gemfile Gemfile.lock /app/
 COPY . /app
+
+RUN chgrp -R 0 /app && \
+    chmod -R g=u /app
 
 WORKDIR /app
 EXPOSE 4000
