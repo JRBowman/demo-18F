@@ -22,5 +22,6 @@ COPY . /app
 WORKDIR /app
 EXPOSE 4000
 
-ENTRYPOINT ["ruby", "/app/docker_entrypoint.rb"]
+# The ENTRYPOINT is what ends up requiring `anyuid` or `privledged` container SCC:
+# ENTRYPOINT ["ruby", "/app/docker_entrypoint.rb"]
 CMD ["./serve-blog"]
