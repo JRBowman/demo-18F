@@ -14,13 +14,16 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
 apt-get install -y nodejs
 
 COPY Gemfile Gemfile.lock /app/
+COPY . /app
 
 RUN cd /app && gem install bundler && bundle install
 
-COPY . /app
+RUN chgrp -R 0 /app && \
+    chmod -R g=u /app
 
 WORKDIR /app
 EXPOSE 4000
 
-ENTRYPOINT ["ruby", "/app/docker_entrypoint.rb"]
+# The ENTRYPOINT is what ends up requiring `anyuid` or `privledged` container SCC:
+# ENTRYPOINT ["ruby", "/app/docker_entrypoint.rb"]
 CMD ["./serve-blog"]
