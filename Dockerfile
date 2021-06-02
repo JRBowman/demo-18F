@@ -19,7 +19,8 @@ COPY . /app
 RUN cd /app && gem install bundler && bundle install
 
 RUN chgrp -R 0 /app && \
-    chmod -R g=u /app
+    chmod -R g=u /app && \
+    chmod +x /app/serve-blog
 
 WORKDIR /app
 EXPOSE 4000
