@@ -9,7 +9,6 @@ if [ -z "$1" ]
     LC_ALL="en_US.UTF-8" \
     bundle exec jekyll serve \
       --detach \
-      --baseurl /site \
       --host 0.0.0.0 \
       --config="_config.yml,_config-accesslint.yml"
   else
@@ -17,7 +16,6 @@ if [ -z "$1" ]
     bundle exec jekyll serve \
       --watch \
       --incremental \
-      --baseurl /site \
       --host 0.0.0.0 \
       --config="_config.yml,_config-accesslint.yml"
       echo "serving site locally..."
